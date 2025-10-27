@@ -30,6 +30,7 @@ To run the demo, first install the following python packages
 ```
 pip install pyarrow fastparquet
 pip install sentence_transformers faiss-cpu
+pip install fastapi uvicorn
 ```
 
 Then run 
@@ -50,8 +51,21 @@ for the command-line search engine.
 
 # Exercises
 
-  - Drop your own images into the images folder and test to see if semantic search still works.
+  - Drop your own images into the images folder and test to see if semantic search still works (you will need to remove the current faiss_index.bin and re-create)
 
   - Experiment with different search phrase and note all the interesting observations.
 
-  - Create an app.py file that uses FastAPI to wrap the search function so it can be deployed as webapp.
+  - Use github co-pilot to help complete `app.py` and `index.html` to achieve the following:
+
+    - Complete the search functionality in `app.py` such that the following call 
+      ```shell
+      curl localhost:8000/search?query=...
+      ```
+      will call semantic_search.search() and return a list of image file names.
+
+    - Create a simple front-end in index.html so that user can type in a text description and be shown the related images in the `images/` directory
+
+    - You can run `app.py` as a webapp using the following command:
+      ```
+      uvicorn app:app --reload
+      ```
