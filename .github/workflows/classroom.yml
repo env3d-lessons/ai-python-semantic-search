@@ -19,7 +19,7 @@ jobs:
       with:
         timeout: 10
         max-score: 6
-        setup-command: 'pip install fastapi'
+        setup-command: 'pip install fastapi uvicorn'
     - name: Autograding Reporter
       uses: classroom-resources/autograding-grading-reporter@v1
       env:
