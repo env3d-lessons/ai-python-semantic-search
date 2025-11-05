@@ -1,10 +1,22 @@
 import os
 import sys
 from pathlib import Path
+import types
 
 # ensure project root (parent of tests/) is on sys.path so we can import app
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
+
+# Mock the semantic_search module before importing app
+fake_semantic = types.ModuleType("semantic_search")
+def _fake_search(query, top_k=3):
+    return [("images/fake.png", 0.999)]
+fake_semantic.search = _fake_search
+
+# Insert into sys.modules so imports see the mock.
+sys.modules["semantic_search"] = fake_semantic
+# also provide under "search" in case app does `import search as search_module`
+sys.modules["search"] = fake_semantic
 
 import app
 from fastapi.testclient import TestClient
