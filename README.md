@@ -28,18 +28,25 @@
 To run the demo, first install the following python packages
 
 ```
+pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cpu
 pip install pyarrow fastparquet
 pip install sentence_transformers faiss-cpu
 pip install fastapi uvicorn
 ```
 
-Then run 
+The `images/` directory contains some sample images from imagenet.  If you like, you 
+can run:
 
 ```
 python download_images.py
 ``` 
 
-to download some sample images from imagenet
+to download some new images from imagenet.  If you do refresh the images, you need to delete
+the `faiss_index.bin` file so the search function will re-create it:
+
+```
+rm faiss_index.bin
+```
 
 Finally run 
 
